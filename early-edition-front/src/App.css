@@ -1,4 +1,8 @@
-@import "./stylesheets/EditArticle.css";
+@import "./stylesheets/home.css";
+@import "./stylesheets/contact.css";
+@import "./stylesheets/apropos.css";
+@import "./stylesheets/editArticle.css";
+@import "./stylesheets/allarticles.css";
 
 h1,
 h3,

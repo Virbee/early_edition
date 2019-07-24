@@ -1,0 +1,8 @@
+.all-page {
+  height: 100vh;
+}
+
+.all-content {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
