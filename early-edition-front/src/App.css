@@ -15,6 +15,10 @@ p {
   text-align: center;
 }
 
+.main-container {
+  height: 74vh;
+}
+
 .App-header {
   background-color: #282c34;
   max-height: 20vh;

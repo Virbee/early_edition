@@ -1,32 +1,55 @@
-import React from "react";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 // get all articles
 //post new article
+class AllArticles extends Component {
+  constructor() {
+    super();
+    this.state = {
+      articles: []
+    };
+  }
 
-function AllArticles() {
-  return (
-    <div className="all-content">
-      <div className="one-article">
-        <Link to="/one-article">
-          <div className="view">View of the article</div>
-          <h3>New</h3>
-        </Link>
-      </div>
-      <div className="one-article">
-        <Link to="/one-article">
-          <div className="view">
-            <h1>Title</h1>
-            <h3>Chapeau</h3>
-            <p>Text</p>
+  getAllArticles() {
+    axios
+      .get("http://localhost:3000/api/articles")
+      .then(articles => this.setState({ articles }))
+      .catch(err => console.log(err));
+  }
+
+  addNew() {
+    this.api
+      .post("/")
+      .then()
+      .catch();
+  }
+
+  render() {
+    return (
+      <div className="all-content">
+        <div className="one-article new-article">
+          <Link to="/one-article">
+            <div className="view">View of the article</div>
+            <h3>New</h3>
+          </Link>
+        </div>
+        {this.state.articles.map(article => (
+          <div className="one-article">
+            <Link key={article._id} to={`/${article._id}`}>
+              <div className="view">
+                <h1>{article.title}</h1>
+                <h3>{article.chapeau}</h3>
+                <p>{article.text}</p>
+              </div>
+              <h3>{article.name}</h3>
+            </Link>
           </div>
-          <h3>Nom de l'article</h3>
-        </Link>
+        ))}
       </div>
-      {/* pour chacun des articles présents dans la base, l'afficher avec son titre */}
-      {/* quand l'affichage est fini, en créer un nouveau vide et l'afficher à la suite avec un plus */}
-    </div>
-  );
+    );
+  }
 }
 
 export default AllArticles;
