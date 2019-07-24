@@ -1,0 +1,54 @@
+.editing-article {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 80vh;
+}
+
+.whole-article {
+  width: 18.5cm;
+  height: 10.5cm;
+  border: 1px solid black;
+  padding: 0.1cm;
+}
+
+.title {
+  width: 100%;
+  height: 1.5cm;
+  border: 1px solid lightgray;
+  text-align: start;
+}
+
+h1#title {
+  font-size: 1.2cm;
+}
+
+.chapeau {
+  width: 100%;
+  height: 1cm;
+  margin: 0.2cm 0;
+  border: 1px solid lightgray;
+  text-align: start;
+}
+
+h3#chapeau {
+  font-size: 0.4cm;
+}
+
+.article-content {
+  height: 7.4cm;
+  text-align: justify;
+  border: 1px solid lightgray;
+}
+
+#content {
+  -webkit-column-count: 4; /* Opera, Safari, Google Chrome */
+  -moz-column-count: 4; /* Firefox */
+  column-count: 4; /* Internet Explorer */
+  height: 7.4cm;
+  column-fill: auto;
+}
+
+p#content {
+  text-indent: 0.2cm;
+}
