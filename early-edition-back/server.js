@@ -41,6 +41,8 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(express.static("public"));
+
 //authenticating route
 const authRoute = require("./auth/auth");
 app.use("/auth", authRoute);

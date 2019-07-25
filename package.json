@@ -1,0 +1,8 @@
+{
+  "name": "early-edition",
+  "version": "0.0.0",
+  "scripts": {
+    "postinstall": "npm install --prefix early-edition-back",
+    "build-front": "npm run build --prefix early-edition-front && cp -R early-edition-front/build/* early-edition-back/public"
+  }
+}
