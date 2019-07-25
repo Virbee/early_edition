@@ -53,6 +53,6 @@ const articleAPI = require("./api/article");
 app.use("/api/users", userAPI);
 app.use("/api/articles", articleAPI);
 
-app.listen(process.env.BACKEND_PORT, () => {
-  console.log("App hosted on: https://localhost:", process.env.BACKEND_PORT);
+app.listen(process.env.PORT, () => {
+  console.log("App hosted on: https://localhost:", process.env.PORT);
 });
