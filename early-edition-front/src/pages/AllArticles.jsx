@@ -58,9 +58,9 @@ class AllArticles extends Component {
           <h3 onClick={e => this.addNew()}>Nouvel article</h3>
         </div>
         {this.state.articles.map(article => (
-          <div className="one-article">
+          <div key={article._id} className="one-article">
             <ArticleCard article={article} />
-            <Link key={article._id} to={`/${article._id}`}>
+            <Link to={`/${article._id}`}>
               <h3>{article.name}</h3>
             </Link>
             <p id={article._id} onClick={e => this.deleteOne(e)}>
