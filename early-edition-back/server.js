@@ -26,9 +26,7 @@ app.use(
   session({
     secret: process.env.SESSION_SECRET,
     cookie: {
-      maxAge: 3600 * 60 * 1000,
-      path: "/",
-      domain: "http://localhost:3000"
+      maxAge: 3600 * 60 * 1000
     },
     store: new MongoStore({
       mongooseConnection: mongoose.connection,
