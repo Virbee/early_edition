@@ -4,6 +4,7 @@
 @import "./stylesheets/editArticle.css";
 @import "./stylesheets/allarticles.css";
 @import "./stylesheets/articleCard.css";
+@import "./stylesheets/forms.css";
 
 h1,
 h3,
@@ -13,12 +14,19 @@ p {
 }
 
 .App {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 }
 
 .main-container {
-  height: 74vh;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
 }
+
+/* HEADER */
 
 .App-header {
   background-color: #282c34;
@@ -31,38 +39,67 @@ p {
   padding: 1em;
 }
 
-.login {
+.App-header a {
+  text-decoration: none;
+  color: white;
+}
+
+.button {
+  border: 1px solid white;
+  border-radius: 6px;
+  padding: 10px;
   font-size: 0.6em;
+  transition: 200ms;
 }
 
-.App-link {
-  color: #61dafb;
+.button:hover {
+  background-color: white;
+  color: #282c34;
+  transition: 200ms;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+/* HOME COMPONENT */
 
-.home-page {
+.home-container {
+  background-image: url(/newspaper.jpg);
+  background-size: cover;
+  padding: 16px;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  height: 100vh;
+  justify-content: center;
 }
 
 .home-content {
+  font-size: 2em;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 16px;
+  text-align: center;
+  min-height: 300px;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
 }
 
+.home-content > p {
+  font-style: italic;
+}
+
+/* FOOTER */
 .App-footer {
   background-color: #282c34;
   max-height: 20vh;
   color: white;
   padding: 1em;
+  text-align: center;
+}
+
+.App-footer a {
+  text-decoration: none;
+  color: white;
+}
+
+.App-footer li {
+  margin-bottom: 0.5em;
+  list-style: none;
 }

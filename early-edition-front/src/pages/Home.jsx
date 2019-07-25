@@ -3,16 +3,11 @@ import EditArticleExemple from "../components/EditArticleExemple";
 
 function Home() {
   return (
-    <div className="home-content">
-      <div className="welcome">
-        <ul>
-          <li>Choisissez votre format</li>
-          <li>Complétez l'article</li>
-          <li>Imprimez-le !</li>
-        </ul>
-        <h3>Essayez, c'est facile ;)</h3>
+    <div className="home-container">
+      <div className="home-content">
+        <h2>L'édition en ligne, en un clic</h2>
+        <p>La presse papier à l'ère du digital</p>
       </div>
-      {/* <EditArticleExemple /> */}
     </div>
   );
 }

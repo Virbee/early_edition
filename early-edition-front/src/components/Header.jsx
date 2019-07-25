@@ -26,8 +26,8 @@ class Header extends Component {
           <h1>
             <Link to="/">Early edition</Link>
           </h1>
-          <Link to="/">
-            <p onClick={() => this.logoutUser()}>Logout</p>
+          <Link className="button" to="/">
+            <p onClick={() => this.logoutUser()}>Se déconnecter</p>
           </Link>
         </header>
       );
@@ -37,8 +37,8 @@ class Header extends Component {
           <h1>
             <Link to="/">Early edition</Link>
           </h1>
-          <Link to="/signup">
-            <p className="login">Se connecter</p>
+          <Link className="button" to="/login">
+            <p>Se connecter</p>
           </Link>
         </header>
       );

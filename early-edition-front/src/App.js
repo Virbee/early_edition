@@ -9,9 +9,9 @@ import Contact from "./pages/Contact";
 import Apropos from "./pages/Apropos";
 import AllArticles from "./pages/AllArticles.jsx";
 import OneArticle from "./pages/OneArticle.jsx";
-import Signup from "./components/auth/SignUp";
+import Signup from "./components/auth/SignUp.jsx";
 import AuthService from "./components/auth/auth-service";
-import Login from "./components/auth/Login.js";
+import Login from "./components/auth/Login.jsx";
 
 class App extends Component {
   constructor(props) {

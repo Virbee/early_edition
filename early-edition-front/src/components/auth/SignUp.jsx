@@ -34,7 +34,7 @@ class Signup extends Component {
 
   render() {
     return (
-      <div>
+      <div className="form">
         <form onSubmit={this.handleFormSubmit}>
           <label>Email:</label>
           <input
@@ -44,7 +44,7 @@ class Signup extends Component {
             onChange={e => this.handleChange(e)}
           />
 
-          <label>Password:</label>
+          <label>Mot de passe :</label>
           <input
             type="password"
             name="password"
@@ -52,12 +52,11 @@ class Signup extends Component {
             onChange={e => this.handleChange(e)}
           />
 
-          <input type="submit" value="Signup" />
+          <input type="submit" value="Inscription" />
         </form>
 
         <p>
-          Already have account?
-          <Link to={"/login"}> Login</Link>
+          Vous avez déjà un compte ? <Link to={"/login"}>Connexion</Link>
         </p>
       </div>
     );

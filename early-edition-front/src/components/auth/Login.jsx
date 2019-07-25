@@ -30,7 +30,7 @@ class Login extends Component {
 
   render() {
     return (
-      <div>
+      <div className="form">
         <form onSubmit={this.handleFormSubmit}>
           <label>Email:</label>
           <input
@@ -39,19 +39,17 @@ class Login extends Component {
             value={this.state.email}
             onChange={e => this.handleChange(e)}
           />
-          <label>Password:</label>
+          <label>Mot de passe:</label>
           <input
             type="password"
             name="password"
             value={this.state.password}
             onChange={e => this.handleChange(e)}
           />
-
-          <input type="submit" value="Login" />
+          <input type="submit" value="Se connecter" />
         </form>
         <p>
-          Don't have account?
-          <Link to={"/signup"}> Signup</Link>
+          Pas de compte ? <Link to={"/signup"}>Inscription</Link>
         </p>
       </div>
     );

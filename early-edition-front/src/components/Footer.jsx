@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 function Footer() {
+  const activeStyle = { fontWeight: "bold", color: "#dfff00" };
   return (
     <footer className="App-footer">
       <ul>
@@ -9,7 +10,7 @@ function Footer() {
           <NavLink
             to="/contacter"
             activeClassName="selected"
-            activeStyle={{ fontWeight: "bold", color: "red" }}
+            activeStyle={activeStyle}
           >
             Contacter
           </NavLink>
@@ -18,7 +19,7 @@ function Footer() {
           <NavLink
             to="/apropos"
             activeClassName="selected"
-            activeStyle={{ fontWeight: "bold", color: "red" }}
+            activeStyle={activeStyle}
           >
             A propos
           </NavLink>
