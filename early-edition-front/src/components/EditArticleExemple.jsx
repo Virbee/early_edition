@@ -53,10 +53,7 @@ class EditArticleExemple extends Component {
 
   saveChange = () => {
     axios
-      .patch(
-        `http://localhost:3000/api/articles/${this.props.article._id}`,
-        this.state
-      )
+      .patch(`/api/articles/${this.props.article._id}`, this.state)
       .then(res => console.log(res))
       .catch(err => console.log(err));
   };

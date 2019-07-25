@@ -5,6 +5,7 @@ import axios from "axios";
 class OneArticle extends Component {
   constructor(props) {
     super();
+    console.log("One article");
     this.state = {
       article: []
     };
@@ -14,7 +15,9 @@ class OneArticle extends Component {
     console.log(this.props);
     const url = this.props.location.pathname.split("/");
     axios
-      .get(`http://localhost:3000/api/articles/${url[1]}`)
+      .get(`/api/articles/${url[1]}`, {
+        withCredentials: true
+      })
       .then(article => this.setState({ article: article.data }))
       .catch(err => console.log(err));
   }

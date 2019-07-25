@@ -4,8 +4,9 @@ import axios from "axios";
 import ArticleCard from "../components/ArticleCard";
 
 class AllArticles extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    console.log(this.props);
     this.state = {
       articles: [],
       new: {
@@ -20,8 +21,10 @@ class AllArticles extends Component {
 
   getAllArticles() {
     axios
-      .get("http://localhost:3000/api/articles")
-      .then(articles => this.setState({ articles: articles.data }))
+      .get("/api/articles", { withCredentials: true })
+      .then(articles => {
+        this.setState({ articles: articles.data });
+      })
       .catch(err => console.log(err));
   }
 
@@ -31,17 +34,21 @@ class AllArticles extends Component {
 
   addNew() {
     axios
-      .post("http://localhost:3000/api/articles")
+      .post("/api/articles", { withCredentials: true })
       .then(res => this.props.history.push(`/${res.data._id}`));
   }
 
   deleteOne = e => {
     const id = e.target.id;
-    axios.delete(`http://localhost:3000/api/articles/${id}`).then(
-      this.setState({
-        articles: this.state.articles.filter(article => article._id !== id)
+    axios
+      .delete(`/api/articles/${id}`, {
+        withCredentials: true
       })
-    );
+      .then(
+        this.setState({
+          articles: this.state.articles.filter(article => article._id !== id)
+        })
+      );
   };
 
   render() {
@@ -51,7 +58,7 @@ class AllArticles extends Component {
           <ArticleCard article={this.state.new} />
           <h3 onClick={e => this.addNew()}>Nouvel article</h3>
         </div>
-        {this.state.articles.map((article, i) => (
+        {this.state.articles.map(article => (
           <div className="one-article">
             <ArticleCard article={article} />
             <Link key={article._id} to={`/${article._id}`}>

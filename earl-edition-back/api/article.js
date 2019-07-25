@@ -3,14 +3,14 @@ const router = new express.Router();
 const Article = require("../models/Article");
 // const cloudinaryUpload = require("./../config/cloudinary");
 
-const getAll = () => Article.find();
+const getAll = ownerId => Article.find({ owner: ownerId });
 const getOne = id => Article.findById(id);
 const updateOne = (id, data) => Article.findByIdAndUpdate(id, data);
 const deleteOne = id => Article.findByIdAndDelete(id);
 const create = data => Article.create(data);
 
 router.get("/", (req, res) => {
-  getAll()
+  getAll(req.user._id)
     .then(articles => {
       res.status(200).send(articles);
     })
@@ -26,12 +26,9 @@ router.get("/:id", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  const { name, title, chapeau, text } = req.body;
+  const owner = req.user;
   create({
-    name,
-    title,
-    chapeau,
-    text
+    owner: owner._id
   })
     .then(article => res.status(200).send(article))
     .catch(err => res.status(500).send("Something went wrong"));

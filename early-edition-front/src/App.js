@@ -45,6 +45,7 @@ class App extends Component {
 
   render() {
     this.fetchUser();
+    console.log(this.state.loggedInUser);
     if (this.state.loggedInUser) {
       return (
         <div className="App">
@@ -56,8 +57,8 @@ class App extends Component {
             <Switch>
               <Route exact path="/contacter" component={Contact} />
               <Route path="/apropos" component={Apropos} />
-              <Route path="/" component={AllArticles} />
               <Route path="/:id" component={OneArticle} />
+              <Route path="/" component={AllArticles} />
             </Switch>
           </section>
           <Footer />

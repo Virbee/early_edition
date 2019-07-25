@@ -12,11 +12,24 @@ const app = express();
 
 app.use(cookieParser());
 app.use(express.json());
+
 app.use(express.urlencoded({ extended: true }));
+app.use(
+  cors({
+    credentials: true,
+    origin: "http://localhost:3000",
+    allowedHeaders: ["content-type", "set-cookie"]
+  })
+);
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
-    cookie: { maxAge: 3600 * 60 * 1000 },
+    cookie: {
+      maxAge: 3600 * 60 * 1000,
+      path: "/",
+      domain: "http://localhost:3000"
+    },
     store: new MongoStore({
       mongooseConnection: mongoose.connection,
       ttl: 24 * 60 * 60
@@ -28,13 +41,6 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(
-  cors({
-    credentials: true,
-    origin: ["http://localhost:3001"]
-  })
-);
-
 //authenticating route
 const authRoute = require("./auth/auth");
 app.use("/auth", authRoute);
@@ -45,6 +51,6 @@ const articleAPI = require("./api/article");
 app.use("/api/users", userAPI);
 app.use("/api/articles", articleAPI);
 
-app.listen(process.env.PORT, () => {
-  console.log("App hosted on: ", process.env.SERVER_URL);
+app.listen(process.env.BACKEND_PORT, () => {
+  console.log("App hosted on: https://localhost:", process.env.BACKEND_PORT);
 });
