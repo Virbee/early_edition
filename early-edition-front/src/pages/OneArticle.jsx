@@ -11,6 +11,7 @@ class OneArticle extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props);
     const url = this.props.location.pathname.split("/");
     axios
       .get(`http://localhost:3000/api/articles/${url[1]}`)

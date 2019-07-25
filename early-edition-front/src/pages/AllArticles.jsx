@@ -31,26 +31,35 @@ class AllArticles extends Component {
 
   addNew() {
     axios
-      .post("http://localhost:3000/api/articles", { name: "Sans nom" })
-      .then(res => this.props.history.push(`/${res.data._id}`))
-      .catch();
+      .post("http://localhost:3000/api/articles")
+      .then(res => this.props.history.push(`/${res.data._id}`));
   }
+
+  deleteOne = e => {
+    const id = e.target.id;
+    axios.delete(`http://localhost:3000/api/articles/${id}`).then(
+      this.setState({
+        articles: this.state.articles.filter(article => article._id !== id)
+      })
+    );
+  };
 
   render() {
     return (
       <div className="all-content">
         <div className="one-article new-article">
           <ArticleCard article={this.state.new} />
-          <Link to="/one-article">
-            <h3 onClick={e => this.addNew()}>New</h3>
-          </Link>
+          <h3 onClick={e => this.addNew()}>Nouvel article</h3>
         </div>
-        {this.state.articles.map(article => (
+        {this.state.articles.map((article, i) => (
           <div className="one-article">
             <ArticleCard article={article} />
             <Link key={article._id} to={`/${article._id}`}>
               <h3>{article.name}</h3>
             </Link>
+            <p id={article._id} onClick={e => this.deleteOne(e)}>
+              Supprimer
+            </p>
           </div>
         ))}
       </div>
