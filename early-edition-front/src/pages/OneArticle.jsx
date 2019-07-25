@@ -5,14 +5,12 @@ import axios from "axios";
 class OneArticle extends Component {
   constructor(props) {
     super();
-    console.log("One article");
     this.state = {
       article: []
     };
   }
 
   componentDidMount() {
-    console.log(this.props);
     const url = this.props.location.pathname.split("/");
     axios
       .get(`/api/articles/${url[1]}`, {

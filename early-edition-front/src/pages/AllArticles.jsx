@@ -6,7 +6,6 @@ import ArticleCard from "../components/ArticleCard";
 class AllArticles extends Component {
   constructor(props) {
     super(props);
-    console.log(this.props);
     this.state = {
       articles: [],
       new: {
