@@ -1,38 +1,40 @@
 import React from "react";
 import ContentEditable from "react-contenteditable";
 
-class EditTitle extends React.Component {
+class EditName extends React.Component {
   constructor(props) {
     super(props);
     this.contentEditable = React.createRef();
-    this.state = { html: "" };
+    this.state = {
+      html: ""
+    };
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.title !== prevProps.title) {
+    if (this.props.name !== prevProps.name) {
       this.setState({
-        html: this.props.title
+        html: this.props.name
       });
     }
   }
 
   handleChange = evt => {
-    const titleDiv = document.getElementById("title");
-    const titleContainer = document.getElementById("title-container");
+    const nameDiv = document.getElementById("name");
+    const nameContainer = document.getElementById("name-container");
     // si il y a overflow, ne pas mettre à jour l'état
-    if (titleDiv.clientHeight <= titleContainer.clientHeight) {
+    if (nameDiv.clientHeight <= nameContainer.clientHeight) {
       this.props.onChange(evt.target.value);
     }
   };
 
   pasteAsPlainText = event => {
     event.preventDefault();
-    const text = event.clipboardData.getData("text/plain").slice(0, 23);
+    const text = event.clipboardData.getData("text/plain").slice(0, 20);
     document.execCommand("insertHTML", false, text); //(aCommandName, aShowDefaultUI, aValueArgument)
   };
 
   render = () => {
-    var cleanString = this.props.title.replace(/&nbsp;/g, " ").toUpperCase();
+    var cleanString = this.props.name.replace(/&nbsp;/g, " ").toLowerCase();
     return (
       <ContentEditable
         innerRef={this.contentEditable}
@@ -41,11 +43,11 @@ class EditTitle extends React.Component {
         onChange={this.handleChange} // handle innerHTML change
         onPaste={this.pasteAsPlainText}
         onBlur={this.props.onBlur}
-        tagName="h1" // Use a custom HTML tag (uses a div by default)
-        id="title"
+        tagName="p" // Use a custom HTML tag (uses a div by default)
+        id="name"
       />
     );
   };
 }
 
-export default EditTitle;
+export default EditName;

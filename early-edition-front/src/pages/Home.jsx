@@ -12,7 +12,7 @@ function Home() {
         </ul>
         <h3>Essayez, c'est facile ;)</h3>
       </div>
-      <EditArticleExemple />
+      {/* <EditArticleExemple /> */}
     </div>
   );
 }

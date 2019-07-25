@@ -3,6 +3,7 @@
 @import "./stylesheets/apropos.css";
 @import "./stylesheets/editArticle.css";
 @import "./stylesheets/allarticles.css";
+@import "./stylesheets/articleCard.css";
 
 h1,
 h3,

@@ -5,20 +5,25 @@ class EditText extends React.Component {
   constructor() {
     super();
     this.contentEditable = React.createRef();
-    this.state = { html: "Entrez le corps de l'article ici" };
+    this.state = { html: "" };
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.text !== prevProps.text) {
+      this.setState({
+        html: this.props.text
+      });
+    }
   }
 
   handleChange = evt => {
     const contentDiv = document.getElementById("content");
     const contentContainer = document.getElementById("content-container");
-    // si il y a overflow, ne pas mettre à jour l'état
     if (
-      contentDiv.clientHeight > contentContainer.clientHeight ||
-      contentContainer.scrollWidth > contentDiv.clientWidth
+      contentDiv.clientHeight <= contentContainer.clientHeight ||
+      contentContainer.scrollWidth <= contentDiv.clientWidth
     ) {
-      this.setState({ html: this.state.html });
-    } else {
-      this.setState({ html: evt.target.value });
+      this.props.onChange(evt.target.value);
     }
   };
 
@@ -37,14 +42,16 @@ class EditText extends React.Component {
   };
 
   render = () => {
+    var cleanString = this.props.text.replace(/&nbsp;/g, " ");
     return (
       <ContentEditable
         innerRef={this.contentEditable}
-        html={this.state.html} // innerHTML of the editable div
+        html={cleanString} // innerHTML of the editable div
         disabled={false} // use true to disable editing
         onChange={this.handleChange} // handle innerHTML change
         onPaste={this.pasteAsPlainText}
         onKeyPress={this.createParagraph}
+        onBlur={this.props.onBlur}
         tagName="p" // Use a custom HTML tag (uses a div by default)
         id="content"
       />

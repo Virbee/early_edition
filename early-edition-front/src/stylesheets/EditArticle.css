@@ -52,3 +52,11 @@ h3#chapeau {
 p#content {
   text-indent: 0.2cm;
 }
+
+#name-container {
+  width: 200px;
+}
+
+#name {
+  min-width: 200px;
+}

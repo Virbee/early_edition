@@ -5,17 +5,23 @@ class EditChapeau extends React.Component {
   constructor() {
     super();
     this.contentEditable = React.createRef();
-    this.state = { html: "Entrez le chapeau ici" };
+    this.state = { html: "" };
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.chapeau !== prevProps.chapeau) {
+      this.setState({
+        html: this.props.chapeau
+      });
+    }
   }
 
   handleChange = evt => {
     const chapeauDiv = document.getElementById("chapeau");
     const chapeauContainer = document.getElementById("chapeau-container");
     // si il y a overflow, ne pas mettre à jour l'état
-    if (chapeauDiv.clientHeight > chapeauContainer.clientHeight) {
-      this.setState({ html: this.state.html });
-    } else {
-      this.setState({ html: evt.target.value });
+    if (chapeauDiv.clientHeight <= chapeauContainer.clientHeight) {
+      this.props.onChange(evt.target.value);
     }
   };
 
@@ -35,14 +41,16 @@ class EditChapeau extends React.Component {
   };
 
   render = () => {
+    var cleanString = this.props.chapeau.replace(/&nbsp;/g, " ");
     return (
       <ContentEditable
         innerRef={this.contentEditable}
-        html={this.state.html} // innerHTML of the editable div
+        html={cleanString} // innerHTML of the editable div
         disabled={false} // use true to disable editing
         onChange={this.handleChange} // handle innerHTML change
         onPaste={this.pasteAsPlainText}
         onKeyPress={this.disableEnter}
+        onBlur={this.props.onBlur}
         tagName="h3" // Use a custom HTML tag (uses a div by default)
         id="chapeau"
       />
