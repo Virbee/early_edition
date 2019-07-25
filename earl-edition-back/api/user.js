@@ -44,13 +44,4 @@ router.patch("/:id", (req, res) => {
   );
 });
 
-//TODO Validation ??
-
-module.exports = {
-  router,
-  getAll,
-  getOne,
-  deleteOne,
-  updateOne,
-  create
-};
+module.exports = router;

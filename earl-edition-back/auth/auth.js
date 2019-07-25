@@ -3,84 +3,70 @@ const router = new express.Router();
 const bcrypt = require("bcrypt");
 const passport = require("passport");
 const User = require("../models/User");
-const cloudinaryUploader = require("../config/cloudinary.js");
 
-router.post(
-  "/signup",
-  // cloudinaryUploader.single("avatar"),
-  (req, res, next) => {
-    const firstname = req.body.firstname;
-    const lastname = req.body.lastname;
-    const email = req.body.email;
-    const password = req.body.password;
-    if (!lastname || !firstname || !password || !email) {
-      res.status(400).json({ message: "Provide username and password" });
+router.post("/signup", (req, res, next) => {
+  const email = req.body.email;
+  const password = req.body.password;
+  if (!password || !email) {
+    res.status(400).json({ message: "Provide username and password" });
+    return;
+  }
+
+  if (password.length < 4) {
+    res.status(400).json({
+      message:
+        "Please make your password at least 8 characters long for security purposes."
+    });
+    return;
+  }
+
+  User.findOne({ email }, (err, foundUser) => {
+    if (err) {
+      res.status(500).json({ message: "Username check went bad." });
       return;
     }
 
-    if (password.length < 4) {
-      res.status(400).json({
-        message:
-          "Please make your password at least 8 characters long for security purposes."
-      });
+    if (foundUser) {
+      res.status(400).json({ message: "Username taken. Choose another one." });
       return;
     }
 
-    User.findOne({ email }, (err, foundUser) => {
+    const salt = bcrypt.genSaltSync(10);
+    const hashPass = bcrypt.hashSync(password, salt);
+
+    const aNewUser = new User({
+      password: hashPass,
+      email: email
+    });
+
+    aNewUser.save(err => {
       if (err) {
-        res.status(500).json({ message: "Username check went bad." });
-        return;
-      }
-
-      if (foundUser) {
         res
           .status(400)
-          .json({ message: "Username taken. Choose another one." });
+          .json({ message: "Saving user to database went wrong." });
         return;
       }
 
-      const salt = bcrypt.genSaltSync(10);
-      const hashPass = bcrypt.hashSync(password, salt);
-
-      const aNewUser = new User({
-        firstname,
-        lastname,
-        password: hashPass,
-        email: email
-        // avatar: avatar
-      });
-
-      aNewUser.save(err => {
+      // Automatically log in user after sign up
+      // .login() here is actually predefined passport method
+      req.login(aNewUser, err => {
         if (err) {
-          res
-            .status(400)
-            .json({ message: "Saving user to database went wrong." });
+          res.status(500).json({ message: "Login after signup went bad." });
           return;
         }
+        // Send the user's information to the frontend
+        // We can use also: res.status(200).json(req.user);
+        //Maybe better not to send the hashed password back to the user : )
 
-        // Automatically log in user after sign up
-        // .login() here is actually predefined passport method
-        req.login(aNewUser, err => {
-          if (err) {
-            res.status(500).json({ message: "Login after signup went bad." });
-            return;
-          }
-          // Send the user's information to the frontend
-          // We can use also: res.status(200).json(req.user);
-          //Maybe better not to send the hashed password back to the user : )
+        const user = {
+          email: aNewUser.email
+        };
 
-          const user = {
-            firstname: aNewUser.firstname,
-            lastname: aNewUser.lastname
-            // avatar: aNewUser.avatar
-          };
-
-          res.status(200).json(user);
-        });
+        res.status(200).json(user);
       });
     });
-  }
-);
+  });
+});
 
 router.post("/login", (req, res, next) => {
   passport.authenticate("local", (err, theUser, failureDetails) => {

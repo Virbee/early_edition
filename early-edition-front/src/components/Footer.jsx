@@ -1,15 +1,27 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function Footer() {
   return (
     <footer className="App-footer">
       <ul>
         <li>
-          <Link to="/contacter">Contacter</Link>
+          <NavLink
+            to="/contacter"
+            activeClassName="selected"
+            activeStyle={{ fontWeight: "bold", color: "red" }}
+          >
+            Contacter
+          </NavLink>
         </li>
         <li>
-          <Link to="/apropos">A propos</Link>
+          <NavLink
+            to="/apropos"
+            activeClassName="selected"
+            activeStyle={{ fontWeight: "bold", color: "red" }}
+          >
+            A propos
+          </NavLink>
         </li>
       </ul>
     </footer>
