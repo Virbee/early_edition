@@ -23,7 +23,9 @@ class OneArticle extends Component {
   render() {
     let editComponent = null;
     if (this.state.article) {
-      editComponent = <EditArticleExemple article={this.state.article} />;
+      editComponent = (
+        <EditArticleExemple article={this.state.article} editable={true} />
+      );
     }
 
     return <div className="one-content">{editComponent}</div>;

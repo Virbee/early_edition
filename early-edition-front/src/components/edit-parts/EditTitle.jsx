@@ -37,7 +37,7 @@ class EditTitle extends React.Component {
       <ContentEditable
         innerRef={this.contentEditable}
         html={cleanString} // innerHTML of the editable div
-        disabled={false} // use true to disable editing
+        disabled={!this.props.editable}
         onChange={this.handleChange} // handle innerHTML change
         onPaste={this.pasteAsPlainText}
         onBlur={this.props.onBlur}

@@ -29,8 +29,12 @@ class EditText extends React.Component {
 
   pasteAsPlainText = event => {
     event.preventDefault();
-    const text = event.clipboardData.getData("text/plain").slice(0, 195);
-    document.execCommand("insertHTML", false, text); //(aCommandName, aShowDefaultUI, aValueArgument)
+    // const text = event.clipboardData.getData("text/plain").slice(0, 195);
+    document.execCommand(
+      "insertHTML",
+      false,
+      event.clipboardData.getData("text/plain")
+    ); //(aCommandName, aShowDefaultUI, aValueArgument)
   };
 
   createParagraph = event => {
@@ -47,7 +51,7 @@ class EditText extends React.Component {
       <ContentEditable
         innerRef={this.contentEditable}
         html={cleanString} // innerHTML of the editable div
-        disabled={false} // use true to disable editing
+        disabled={!this.props.editable}
         onChange={this.handleChange} // handle innerHTML change
         onPaste={this.pasteAsPlainText}
         onKeyPress={this.createParagraph}

@@ -8,12 +8,16 @@ import EditName from "./edit-parts/EditName";
 class EditArticleExemple extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      name: "",
-      title: "",
-      chapeau: "",
-      text: ""
-    };
+    if (this.props.article) {
+      this.state = { ...this.props.article };
+    } else {
+      this.state = {
+        name: "",
+        title: "",
+        chapeau: "",
+        text: ""
+      };
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -63,11 +67,14 @@ class EditArticleExemple extends Component {
     let editTitle = null;
     let editChapeau = null;
     let editText = null;
+    console.log(this.props);
+
     if (this.state.title) {
       editName = (
         <EditName
           name={this.state.name}
           onBlur={this.saveChange}
+          editable={this.props.editable}
           onChange={this.handleChangeName}
         />
       );
@@ -75,6 +82,7 @@ class EditArticleExemple extends Component {
         <EditTitle
           title={this.state.title}
           onBlur={this.saveChange}
+          editable={this.props.editable}
           onChange={this.handleChangeTitle}
         />
       );
@@ -82,6 +90,7 @@ class EditArticleExemple extends Component {
         <EditChapeau
           chapeau={this.state.chapeau}
           onBlur={this.saveChange}
+          editable={this.props.editable}
           onChange={this.handleChangeChapeau}
         />
       );
@@ -89,6 +98,7 @@ class EditArticleExemple extends Component {
         <EditText
           text={this.state.text}
           onBlur={this.saveChange}
+          editable={this.props.editable}
           onChange={this.handleChangeText}
         />
       );

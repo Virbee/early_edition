@@ -44,9 +44,9 @@ class EditChapeau extends React.Component {
     var cleanString = this.props.chapeau.replace(/&nbsp;/g, " ");
     return (
       <ContentEditable
+        disabled={!this.props.editable}
         innerRef={this.contentEditable}
         html={cleanString} // innerHTML of the editable div
-        disabled={false} // use true to disable editing
         onChange={this.handleChange} // handle innerHTML change
         onPaste={this.pasteAsPlainText}
         onKeyPress={this.disableEnter}

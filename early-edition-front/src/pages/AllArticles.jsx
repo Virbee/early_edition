@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import ArticleCard from "../components/ArticleCard";
+import EditArticleExemple from "../components/EditArticleExemple";
 
 class AllArticles extends Component {
   constructor(props) {
@@ -53,13 +54,12 @@ class AllArticles extends Component {
   render() {
     return (
       <div className="all-content">
-        <div className="one-article new-article">
-          <ArticleCard article={this.state.new} />
-          <h3 onClick={e => this.addNew()}>Nouvel article</h3>
+        <div className="one-article new-article" onClick={e => this.addNew()}>
+          +
         </div>
         {this.state.articles.map(article => (
           <div key={article._id} className="one-article">
-            <ArticleCard article={article} />
+            <EditArticleExemple article={article} editable={false} />
             <Link to={`/${article._id}`}>
               <h3>{article.name}</h3>
             </Link>
