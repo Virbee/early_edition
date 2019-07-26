@@ -51,6 +51,7 @@ class EditText extends React.Component {
         onBlur={this.props.onBlur}
         tagName="p" // Use a custom HTML tag (uses a div by default)
         id="content"
+        className={this.props.className}
       />
     );
   };

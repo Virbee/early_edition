@@ -98,7 +98,7 @@ class EditArticleExemple extends Component {
       editName = (
         <EditName
           name={this.state.name}
-          onBlur={this.saveChange}
+          onBlur={this.sanitize}
           editable={this.props.editable}
           onChange={this.handleChangeName}
           className={this.props.className}
