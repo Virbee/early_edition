@@ -26,6 +26,7 @@ class Header extends Component {
           <h1>
             <Link to="/">Early edition</Link>
           </h1>
+          <h4>Bienvenue {this.state.loggedInUser.email}</h4>
           <Link className="button" to="/">
             <p onClick={() => this.logoutUser()}>Se déconnecter</p>
           </Link>

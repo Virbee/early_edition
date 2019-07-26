@@ -24,11 +24,19 @@ class OneArticle extends Component {
     let editComponent = null;
     if (this.state.article) {
       editComponent = (
-        <EditArticleExemple article={this.state.article} editable={true} />
+        <EditArticleExemple
+          article={this.state.article}
+          editable={true}
+          className="hovering"
+        />
       );
     }
 
-    return <div className="one-content">{editComponent}</div>;
+    return (
+      <div className="one-content">
+        <div className="one-editable">{editComponent}</div>
+      </div>
+    );
   }
 }
 

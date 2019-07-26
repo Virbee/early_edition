@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import ArticleCard from "../components/ArticleCard";
+// import ArticleCard from "../components/ArticleCard";
 import EditArticleExemple from "../components/EditArticleExemple";
 
 class AllArticles extends Component {
@@ -10,11 +10,12 @@ class AllArticles extends Component {
     this.state = {
       articles: [],
       new: {
-        title: "ENTREZ LE TITRE",
+        name: "+",
+        title: "Lorem ipsum dolor",
         chapeau:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor.",
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         text:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa."
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa."
       }
     };
   }
@@ -54,18 +55,24 @@ class AllArticles extends Component {
   render() {
     return (
       <div className="all-content">
-        <div className="one-article new-article" onClick={e => this.addNew()}>
-          +
+        <div className="new-article" onClick={e => this.addNew()}>
+          {/* + */}
+          <EditArticleExemple article={this.state.new} editable={false} />
         </div>
         {this.state.articles.map(article => (
           <div key={article._id} className="one-article">
-            <EditArticleExemple article={article} editable={false} />
+            <div className="delete">
+              <p
+                id={article._id}
+                onClick={e => this.deleteOne(e)}
+                className="delete-button"
+              >
+                X
+              </p>
+            </div>
             <Link to={`/${article._id}`}>
-              <h3>{article.name}</h3>
+              <EditArticleExemple article={article} editable={false} />
             </Link>
-            <p id={article._id} onClick={e => this.deleteOne(e)}>
-              Supprimer
-            </p>
           </div>
         ))}
       </div>

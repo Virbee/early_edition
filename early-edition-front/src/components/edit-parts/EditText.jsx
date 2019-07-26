@@ -17,14 +17,7 @@ class EditText extends React.Component {
   }
 
   handleChange = evt => {
-    const contentDiv = document.getElementById("content");
-    const contentContainer = document.getElementById("content-container");
-    if (
-      contentDiv.clientHeight <= contentContainer.clientHeight ||
-      contentContainer.scrollWidth <= contentDiv.clientWidth
-    ) {
-      this.props.onChange(evt.target.value);
-    }
+    this.props.onChange(evt.target.value);
   };
 
   pasteAsPlainText = event => {

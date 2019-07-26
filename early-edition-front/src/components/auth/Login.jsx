@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = { email: "", password: "" };
+    this.state = { email: "", password: "", message: "" };
     this.service = new AuthService();
   }
 
@@ -20,7 +20,7 @@ class Login extends Component {
         this.props.getUser(response);
         this.props.history.push("/");
       })
-      .catch(error => console.log(error));
+      .catch(err => this.setState({ message: err.message }));
   };
 
   handleChange = event => {
@@ -29,6 +29,10 @@ class Login extends Component {
   };
 
   render() {
+    let errorMessage = null;
+    if (this.state.message) {
+      errorMessage = errorMessage = <p>{this.state.message}</p>;
+    }
     return (
       <div className="form">
         <form onSubmit={this.handleFormSubmit}>
@@ -51,6 +55,7 @@ class Login extends Component {
         <p>
           Pas de compte ? <Link to={"/signup"}>Inscription</Link>
         </p>
+        <div className="error">{errorMessage}</div>
       </div>
     );
   }

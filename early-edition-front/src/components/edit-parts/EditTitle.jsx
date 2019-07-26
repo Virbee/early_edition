@@ -17,12 +17,7 @@ class EditTitle extends React.Component {
   }
 
   handleChange = evt => {
-    const titleDiv = document.getElementById("title");
-    const titleContainer = document.getElementById("title-container");
-    // si il y a overflow, ne pas mettre à jour l'état
-    if (titleDiv.clientHeight <= titleContainer.clientHeight) {
-      this.props.onChange(evt.target.value);
-    }
+    this.props.onChange(evt.target.value);
   };
 
   pasteAsPlainText = event => {
@@ -43,6 +38,7 @@ class EditTitle extends React.Component {
         onBlur={this.props.onBlur}
         tagName="h1" // Use a custom HTML tag (uses a div by default)
         id="title"
+        className={this.props.className}
       />
     );
   };

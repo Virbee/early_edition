@@ -32,15 +32,32 @@ class EditArticleExemple extends Component {
   }
 
   handleChangeName = value => {
-    this.setState({
-      name: value
-    });
+    const nameDiv = document.getElementById("name");
+    const nameContainer = document.getElementById("name-container");
+    if (nameDiv.clientHeight > nameContainer.clientHeight) {
+      this.setState({
+        name: this.state.name
+      });
+    } else {
+      this.setState({ name: value });
+    }
   };
 
   handleChangeText = value => {
-    this.setState({
-      text: value
-    });
+    const contentDiv = document.getElementById("content");
+    const contentContainer = document.getElementById("content-container");
+    if (
+      contentDiv.clientHeight > contentContainer.clientHeight ||
+      contentDiv.scrollWidth > contentContainer.clientWidth
+    ) {
+      this.setState({
+        text: this.state.text
+      });
+    } else {
+      this.setState({
+        text: value
+      });
+    }
   };
 
   handleChangeChapeau = value => {
@@ -50,9 +67,18 @@ class EditArticleExemple extends Component {
   };
 
   handleChangeTitle = value => {
-    this.setState({
-      title: value
-    });
+    const titleDiv = document.getElementById("title");
+    const titleContainer = document.getElementById("title-container");
+    // si il y a overflow, ne pas mettre à jour l'état
+    if (titleDiv.clientHeight > titleContainer.clientHeight) {
+      this.setState({
+        title: this.state.title
+      });
+    } else {
+      this.setState({
+        title: value
+      });
+    }
   };
 
   saveChange = () => {
@@ -67,7 +93,6 @@ class EditArticleExemple extends Component {
     let editTitle = null;
     let editChapeau = null;
     let editText = null;
-    console.log(this.props);
 
     if (this.state.title) {
       editName = (
@@ -76,6 +101,7 @@ class EditArticleExemple extends Component {
           onBlur={this.saveChange}
           editable={this.props.editable}
           onChange={this.handleChangeName}
+          className={this.props.className}
         />
       );
       editTitle = (
@@ -84,6 +110,7 @@ class EditArticleExemple extends Component {
           onBlur={this.saveChange}
           editable={this.props.editable}
           onChange={this.handleChangeTitle}
+          className={this.props.className}
         />
       );
       editChapeau = (
@@ -92,6 +119,7 @@ class EditArticleExemple extends Component {
           onBlur={this.saveChange}
           editable={this.props.editable}
           onChange={this.handleChangeChapeau}
+          className={this.props.className}
         />
       );
       editText = (
@@ -100,25 +128,18 @@ class EditArticleExemple extends Component {
           onBlur={this.saveChange}
           editable={this.props.editable}
           onChange={this.handleChangeText}
+          className={this.props.className}
         />
       );
     }
 
     return (
       <section className="editing-article">
-        <div className="name-article" id="name-container">
-          {editName}
-        </div>
+        <div id="name-container">{editName}</div>
         <div className="whole-article">
-          <div className="title" id="title-container">
-            {editTitle}
-          </div>
-          <div className="chapeau" id="chapeau-container">
-            {editChapeau}
-          </div>
-          <div className="article-content" id="content-container">
-            {editText}
-          </div>
+          <div id="title-container">{editTitle}</div>
+          <div id="chapeau-container">{editChapeau}</div>
+          <div id="content-container">{editText}</div>
         </div>
       </section>
     );

@@ -1,3 +1,11 @@
+.one-content {
+  display: flex;
+  justify-content: center;
+}
+
+.one-editable {
+  background-color: lightgray;
+}
 .editing-article {
   display: flex;
   flex-direction: column;
@@ -9,12 +17,15 @@
   height: 10.5cm;
   border: 1px solid black;
   padding: 0.1cm;
-  background-color: lightgray;
 }
 
-.title {
+#title-container {
+  max-height: 57px;
+}
+
+#title {
   width: 100%;
-  height: 1.5cm;
+
   border: 1px solid slategray;
   text-align: start;
 }
@@ -23,21 +34,26 @@ h1#title {
   font-size: 1.2cm;
 }
 
-.chapeau {
+#chapeau-container {
+  max-height: 1cm;
+}
+
+#chapeau {
   width: 100%;
-  height: 1cm;
+  max-height: 1cm;
   margin: 0.2cm 0;
   border: 1px solid slategray;
   text-align: start;
+  overflow: hidden;
+  text-overflow: clip;
 }
 
 h3#chapeau {
   font-size: 0.4cm;
 }
 
-.article-content {
-  height: 7.4cm;
-  text-align: justify;
+#content-container {
+  max-height: 280px;
   border: 1px solid slategray;
 }
 
@@ -45,7 +61,8 @@ h3#chapeau {
   -webkit-column-count: 3; /* Opera, Safari, Google Chrome */
   -moz-column-count: 3; /* Firefox */
   column-count: 3; /* Internet Explorer */
-  height: 7.4cm;
+  height: 280px;
+  text-align: justify;
   column-fill: auto;
 }
 
@@ -54,9 +71,21 @@ p#content {
 }
 
 #name-container {
+  margin: 10px;
+  font-size: 2em;
+  text-align: center;
   width: 200px;
+  max-height: 40px;
 }
 
 #name {
   min-width: 200px;
+}
+
+.hovering:hover {
+  background-color: white;
+}
+
+.hovering:focus {
+  background-color: white;
 }

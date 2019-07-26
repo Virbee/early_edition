@@ -17,12 +17,7 @@ class EditChapeau extends React.Component {
   }
 
   handleChange = evt => {
-    const chapeauDiv = document.getElementById("chapeau");
-    const chapeauContainer = document.getElementById("chapeau-container");
-    // si il y a overflow, ne pas mettre à jour l'état
-    if (chapeauDiv.clientHeight <= chapeauContainer.clientHeight) {
-      this.props.onChange(evt.target.value);
-    }
+    this.props.onChange(evt.target.value);
   };
 
   disableEnter = event => {
@@ -36,7 +31,7 @@ class EditChapeau extends React.Component {
 
   pasteAsPlainText = event => {
     event.preventDefault();
-    const text = event.clipboardData.getData("text/plain").slice(0, 195);
+    const text = event.clipboardData.getData("text/plain");
     document.execCommand("insertHTML", false, text); //(aCommandName, aShowDefaultUI, aValueArgument)
   };
 
@@ -53,6 +48,7 @@ class EditChapeau extends React.Component {
         onBlur={this.props.onBlur}
         tagName="h3" // Use a custom HTML tag (uses a div by default)
         id="chapeau"
+        className={this.props.className}
       />
     );
   };
